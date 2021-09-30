@@ -17,7 +17,6 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
 [![MIT License][license-shield]][license-url]
 
 
@@ -70,7 +69,7 @@ npm install maven
 
 Clone the repo
 ```sh
-git clone https://github.com/Hubsaab/Team_C5_Bookstore
+git clone https://github.com/djf73267/Website
 ```
 
 ### Running the Program
@@ -108,8 +107,6 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/badge/contributors-4-brightgreen
-[contributors-url]: https://github.com/Hubsaab/Team_C5_Bookstore/graphs/contributors
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
 [license-url]: https://github.com/Hubsaab/Team_C5_Bookstore/blob/master/LICENSE
 
