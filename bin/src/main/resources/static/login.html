@@ -1,0 +1,134 @@
+﻿<!--{% extends 'base.html' %} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--	{% block head_header %}
+		{{ super() }}
+	{% endblock %} -->
+	<title> Sign In </title>
+</head>
+<body>
+	<div id="div1">
+	<!--	{% block body_header %}
+			{{ super() }}
+		{% endblock %} -->
+		<!-- container -->
+    <!--
+		{% block menu_content %}
+			{{ super() }}
+		{% endblock %}--><!-- container -->
+
+        <!--{% block flash %}
+            {{ super() }}
+        {% endblock %}
+
+		{% block main_content %} -->
+		<div class="container">
+        <h1 style="color:#2a8fbd;">Login</h1>
+        <p class="lead">This panel lets you login to your existing account</p>
+    </div>
+		<div id="main_content">
+            <style>
+                /*LOGIN form*/
+                .login {
+                    width: 30%;
+                }
+
+                #log {
+                    border: 3px solid #f1f1f1;
+                    position: relative;
+                    margin: auto;
+                    width: 30em;
+                    margin-top: 2em;
+                    border-radius: 10px;
+                }
+
+                input[type=email], input[type=password] {
+                    width: 100%;
+                    padding: 12px 20px;
+                    margin: 8px 0;
+                    display: inline-block;
+                    border: 1px solid #ccc;
+                    box-sizing: border-box;
+                }
+
+                .bttn {
+                    background-color: #2a8fbd;
+                    color: white;
+                    padding: 14px 20px;
+                    margin: 8px 0;
+                    border: none;
+                    cursor: pointer;
+                    width: 100%;
+                    border-radius: 7px;
+                }
+
+                    .bttn:hover {
+                        opacity: 0.8;
+                    }
+
+                .cancelbtn {
+                    width: auto;
+                    padding: 10px 10px;
+                    background-color: #2a8fbd;
+                }
+								.registerbtn {
+										width: auto;
+										padding: 10px 10px;
+										background-color: #2a8fbd;
+								}
+                .container {
+                    padding: 16px;
+                }
+
+                span.psw {
+                    float: right;
+                    padding-top: 16px;
+                }
+            </style>
+            <div id="login">
+                <form action="{{ url_for('login_action') }}" method="post">
+                    <div class="container">
+                        <label for="email"><b>Email Address</b></label>
+                        <input type="email" placeholder="Enter Email Address" name="email" id="email" required>
+
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="psw" required>
+                        <label>
+                            <input type="checkbox" name="remember"> Remember me
+                        </label>
+                        <button class="bttn" type="submit"> Login </button>
+                    </div>
+                </form>
+
+                <div class="container" style="background-color:#f1f1f1">
+                    <form action="#" th:action="@{/home}" method="GET">
+                        <button type="submit" class="cancelbtn bttn">Back</button>
+                    </form>
+                    
+                    <form action="#" th:action="@{/register}" method="GET">
+                        <button type="submit" class="registerbtn bttn">
+                            Register
+                        </button>
+                    </form>
+					
+
+                    <form action="#" th:action="@{/forgot}" method="GET">
+                        <button type="submit" class="cancelbtn bttn">Forgot</button>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+				<!--
+		{% endblock %}--><!-- main_content -->
+		<!--{% block footer %}
+			{{ super() }}
+		{% endblock %} -->
+	</div><!-- div1 -->
+	<!--	{% block scripts %}
+			{{ super() }}
+		{% endblock %} -->
+
+</body>
+</html>

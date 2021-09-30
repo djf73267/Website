@@ -1,0 +1,87 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
+    <script type="text/javascript">
+        window.onload = initiate;
+        function initiate() {
+        //var search_query=document.getElementById('search_query');
+        var menu_closed=true;
+        var menu_content=document.getElementById('menu_content');
+        var mobile_button=document.getElementById('mobile_button');
+        mobile_button.onclick=function(){
+        if(menu_closed) {
+        menu_closed=false;
+        menu_content.style.display='block';
+        menu_content.style.height='70%';
+        } else {
+        menu_content.style.display='none';
+        menu_content.style.height='0%';
+        menu_closed=true;
+        }
+        };
+        };
+
+
+    </script>
+
+</head>
+
+<body>
+  <div id="div1">
+
+      <header class="container-fluid">
+          <div>
+              <a href="#" id="logo"><img th:src="@{/images/logo.png}" alt="TeamC5"/>TeamC5 Online Bookstore</a>
+
+          </div>
+      </header>
+
+  <div class="container">
+      <div class="container">
+        <img data-image="black" th:src="|@{ ${book.cover_picture} }|" alt="${book.cover_picture}"/>
+      </div>
+  <!-- Right Column -->
+  <div class="left-column">
+
+    <!-- Product Description -->
+    <div class="product-description">
+      <h1 th:text="${book.title}"></h1> <!-- title -->
+      <h2 th:text="${book.author}"></h2> <!-- author -->
+      <p><span th:text="${book.description}"></span></p> <!-- description -->
+    </div>
+  </div>
+
+
+    <!-- Product Configuration -->
+    <div class="product-configuration">
+
+      <!-- Product Color -->
+
+
+      <!-- Cable Configuration 
+      <div class="Type">
+        <div class="cable-choose">
+          <button>Signed Book</button>
+          <button>Hardback</button>
+          <button>Paperback</button>
+					<button>eBook</button>
+        </div>
+
+
+      </div> !-->
+    </div>
+
+    <!-- Product Pricing -->
+    <div class="product-price">
+      <a th:href="@{/cart}" class="cart-btn">Add to cart</a>
+    </div>
+  </div>
+</main>
+</body>
+</html>

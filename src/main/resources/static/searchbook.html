@@ -1,0 +1,130 @@
+<!-- {% extends 'base.html' %} -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
+<script type="text/javascript">
+    window.onload = initiate;
+    function initiate() {
+    //var search_query=document.getElementById('search_query');
+    var menu_closed=true;
+    var menu_content=document.getElementById('menu_content');
+    var mobile_button=document.getElementById('mobile_button');
+    mobile_button.onclick=function(){
+    if(menu_closed) {
+    menu_closed=false;
+    menu_content.style.display='block';
+    menu_content.style.height='70%';
+    } else {
+    menu_content.style.display='none';
+    menu_content.style.height='0%';
+    menu_closed=true;
+    }
+    };
+    };
+
+    </script>
+    </head>
+
+    <body>
+    <div id="div1">
+
+      <header class="container-fluid">
+          <div>
+              <a href="#" id="logo"><img th:src="@{/images/logo.png}" alt="TeamC5"/>TeamC5 Online Bookstore</a>
+
+          </div>
+      </header>
+    </div>
+
+
+      
+        <ul>
+
+            <li class='text-success'></li>
+
+            <li class='text-danger'></li>
+
+        </ul>
+
+
+
+<head>
+   <!--
+   {% block head_header %}
+    {{ super() }}
+    {% endblock %}
+  -->
+    <title> Search Books </title>
+</head>
+<body>
+<div id="div1">
+  <!--
+    {% block body_header %}
+    {{ super() }}
+    {% endblock %}-->
+    <!-- container -->
+   <!--
+    {% block menu_content %}
+    {{ super() }}
+    {% endblock %} --> <!-- container -->
+  <!--
+    {% block main_content %} -->
+    <div class="container">
+        <h1 class="display-4">Search Books</h1>
+        <p class="lead">This panel lets you search books by category</p>
+    </div>
+
+    <div class="container">
+        <form action="../templates/searchResults.html", method="post">
+            <div class="form-group row">
+                <label class="col-3 col-form-label" for="title"> Book Title </label>
+                <input type="text" class="col-6 form-control" id="title" name="title">
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-form-label" for="author"> Book Author </label>
+                <input type="text" class="col-6 form-control" id="author" name="author">
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-form-label" for="ISBN"> ISBN </label>
+                <input type="text" class="col-6 form-control" id="ISBN" name="ISBN">
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-form-label" for="category"> Book Category </label>
+                <select class="form-control col-6" name="category" id="category">
+                    <option value="0"> Choose </option>
+
+                    <option value="Fiction"> Fiction </option>
+                    <option value="Non-Fiction"> Non-Fiction </option>
+                    <option value="Science Fiction"> Science Fiction </option>
+                    <option value="Self Help"> Self Help</option>
+                    <option value="Memoires"> Memoires </option>
+                    <option value="Autobiography"> Autobiography </option>
+                    <option value="Comics"> Comics </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <input type="submit" class="btn btn-primary btn-lg btn-block col-4 justify-content-center"
+                   value="Submit Book">
+            <input type="Back" class="btn btn-primary btn-lg btn-block col-4 justify-content-center"
+                   value="Back"><a th:href="@{/home}"></a>
+        </form>
+    </div>
+</div>
+   <!--
+    {% endblock %} --><!-- main_content -->
+  <!--  {% block footer %}
+    {{ super() }}
+    {% endblock %}
+</div>--><!-- div1 -->
+<!--
+{% block scripts %}
+{{ super() }}
+{% endblock %}
+-->
+</body>
+</html>

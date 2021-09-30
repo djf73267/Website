@@ -70,7 +70,7 @@ npm install maven
 
 Clone the repo
 ```sh
-git clone https://github.com/djf73267/Website
+git clone https://github.com/Hubsaab/Team_C5_Bookstore
 ```
 
 ### Running the Program

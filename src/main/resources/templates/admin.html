@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
+    <script type="text/javascript">
+        window.onload = initiate;
+        function initiate() {
+        //var search_query=document.getElementById('search_query');
+        var menu_closed=true;
+        var menu_content=document.getElementById('menu_content');
+        var mobile_button=document.getElementById('mobile_button');
+        mobile_button.onclick=function(){
+        if(menu_closed) {
+        menu_closed=false;
+        menu_content.style.display='block';
+        menu_content.style.height='70%';
+        } else {
+        menu_content.style.display='none';
+        menu_content.style.height='0%';
+        menu_closed=true;
+        }
+        };
+        };
+
+
+    </script>
+
+</head>
+
+<body>
+  <div id="div1">
+
+      <header class="container-fluid">
+          <div>
+              <a href="#" id="logo"><img th:src="@{/images/logo.png}" alt="TeamC5"/>TeamC5 Online Bookstore</a>
+
+          </div>
+      </header>
+<body>
+<div id="div1">
+
+
+
+    <div id="main_content">
+
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 style="color:#2a8fbd;">Admin Dashboard</h1>
+                <p class="lead">Pick a section to manage.</p>
+            </div>
+        </div>
+        <div class="dashboard">
+            <a th:href="@{/admin/manage/books}"><img th:src="@{/images/books_icon.png}"/>Books</a>
+            <a th:href="@{/admin/manage/users}"><img th:src="@{/images/users_icon.png}"/>Users</a>
+            <a th:href="@{/admin/manage/addpromo}"><img th:src="@{/images/promotions_icon.png}"/>Promotions</a>
+        </div>
+    </div>
+
+</div><!-- div1 -->
+
+
+</body>
+</html>

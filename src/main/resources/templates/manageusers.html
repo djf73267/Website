@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="manage users portal" />
+  <meta name="author" content="" />
+  <link rel="icon" href="favicon.ico" />
+
+  <title>Forgot Password</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link th:href="@{css/manageusers.css}" rel="stylesheet" />
+  
+  
+</head>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" th:href="@{/admin}">Admin Dashboard</a>
+    <button
+      class="navbar-toggler d-lg-none"
+      type="button"
+      data-toggle="collapse"
+      data-target="#collapsibleNavId"
+      aria-controls="collapsibleNavId"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+        <li class="nav-item active">
+          <a class="nav-link" href="#"
+            >Manage Users <span class="sr-only">(current)</span></a>
+        </li>
+          
+          <li class="nav-item">
+              <a class="nav-link" th:href="@{/admin/manage/books}">Manage Books</a>
+          </li>
+
+      
+      
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/admin/manage/addpromo}">Manage Promotions</a>
+        </li>
+        
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownId">
+            <a class="dropdown-item" href="#">Action 1</a>
+            <a class="dropdown-item" href="#">Action 2</a>
+          </div>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/home}">Home</a>
+        </li>
+      </ul>
+      <!-- <form class="form-inline my-2 my-lg-0">
+        <input
+          class="form-control mr-sm-2"
+          type="text"
+          placeholder="Search"
+        />
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          Search
+        </button>
+      </form> -->
+      
+    </div>
+  </nav>
+</header>
+
+<body>
+    
+
+  
+
+    <form th:action="@{/admin/manage/users/search}" method="GET">
+      <div class="form-group">
+        <label for="search">Search by Username</label>
+        <input id="search" th:name="search" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Username" required>
+        <small id="searchHelp" class="form-text text-muted">Enter the username of who you wish to manage.</small>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

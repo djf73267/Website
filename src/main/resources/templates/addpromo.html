@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title> Add Promo </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" th:href="@{/admin}">Admin Dashboard</a>
+      <button
+        class="navbar-toggler d-lg-none"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapsibleNavId"
+        aria-controls="collapsibleNavId"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/manage/users}">Manage Users</a>
+            </li>
+
+        
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/manage/books}">Manage Books</a>
+          </li>
+
+          <li class="nav-item active">
+            <a class="nav-link" href="#"
+              >Manage Promotions <span class="sr-only">(current)</span></a>
+          </li>
+          
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item" href="#">Action 1</a>
+              <a class="dropdown-item" href="#">Action 2</a>
+            </div>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/home}">Home</a>
+          </li>
+        </ul>
+        <!-- <form class="form-inline my-2 my-lg-0">
+          <input
+            class="form-control mr-sm-2"
+            type="text"
+            placeholder="Search"
+          />
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            Search
+          </button>
+        </form> -->
+        
+      </div>
+    </nav>
+  </header>
+<body>
+<div id="div1">
+  <div class="container text-left">
+      <h1 style="color:#2a8fbd;">Add Promos</h1>
+      <p class="lead">This panel lets you add a new promo</p>
+      <p class="text-danger"> All fields are required. </p>
+  </div>
+
+    <div id="main_content">
+        <div class="promomanager">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Promo Code</th>
+                    <th>Reduction Rate (%)</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    
+                   
+                </tr>
+                </thead>
+                
+           
+                <form id="promoform" th:action="@{/admin/manage/addpromo}" th:object="${promotion}" method="POST" role = "form" data-toggle="validator">
+                    <tr>
+                        <th><input type="text" th:name = "promoName" id = "promoName"required></th>
+                        <th><input type="number" th:name = "amount" id = "amount" required></th>
+                        <th><input type="date" th:name = "startDate" id = "startDate" required></th>
+                        <th><input type="date" th:name = "endDate" id = "endDate" required></th>
+                        <th>
+                            <input type="submit" class="btn btn-primary" value="Add promo">
+                            
+                        </th>
+                    
+                    </tr>
+            
+                    
+                </form>  
+            </table>  
+        </div>
+        
+    </div>
+    <span style="margin-top: 200px;"></span>
+    <span style="margin-top: 200px;"></span>
+    <span style="margin-top: 200px;"></span>
+    <span style="margin-top: 200px;"></span>
+
+    
+
+
+    <h2>Promotions:</h2>
+    <table class="table table-hover" cellpadding="10">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Rate</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="promotion: ${listPromo}">
+                <td th:text="${promotion.promoName}">Promo Name</td>
+                <td th:text="${promotion.amount}">Amount</td>
+                <td th:text="${promotion.startDate}">Start Date</td>
+                <td th:text="${promotion.endDate}">End Date</td>
+                <td>
+                    <a th:href="@{'/admin/manage/sendEmail/' + ${promotion.ID}}">Send Email</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div><!-- div1 -->
+<!-- jQuery-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+<!-- Bootstrap -->
+<script
+  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+  integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+  crossorigin="anonymous"></script>
+
+<!-- Bootstrap Validator plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
+</body>
+</html>

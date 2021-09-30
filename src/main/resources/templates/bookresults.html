@@ -1,0 +1,106 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>User Search</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/css/booksearch.css}" type="text/css"/>
+    </head>
+
+
+    <body>
+
+        <div class="container">
+            <div class="row ng-scope">
+                <div class="col-md-3 col-md-push-9"> <!-- Results Filtering -->
+                    <h4>Results <span class="fw-semi-bold">Filtering</span></h4>
+                    <p class="text-muted fs-mini">Listed content is categorized by the following groups:</p>
+                    <ul class="nav nav-pills nav-stacked search-result-categories mt">
+                        <li><a href="#">Friends <span class="badge">34</span></a>
+                        </li>
+                        <li><a href="#">Pages <span class="badge">9</span></a>
+                        </li>
+                        <li><a href="#">Images</a>
+                        </li>
+                        <li><a href="#">Groups</a>
+                        </li>
+                        <li><a href="#">Globals <span class="badge">18</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-9 col-md-pull-3">
+                    <p class="search-results-count" th:text="|About ${#lists.size(books)} results for &quot;${query}&quot;|"></p>
+
+
+
+                    <!-- Loop over results -->
+                    <section class="search-result-item" th:each="book : ${books}">
+                        <a class="image-link" th:href="'/book/' + ${book.ISBN}"><img class="image" th:src="|@{ ${book.cover_picture} }|" alt="book cover">
+                        </a>
+                        <div class="search-result-item-body">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <h4 class="search-result-item-heading"><span th:text="${book.title}"></span></h4>
+                                    <p class="info" th:text="${book.author}"></p>
+                                    <p class="description" th:text="${book.description}"></p>
+                                    <a class="btn btn-primary btn-info btn-sm" th:href="'/book/' + ${book.ISBN}">Expand</a>
+                                </div>
+                                <div id="rightcol" class="col-sm-3 text-align-center">
+                                    <div class="container-fluid h-100">
+                                       
+                                            Price
+                                            <p class="value3 mt-sm" th:utext="|$ ${book.price}|"></p>
+                                            
+                                       
+                                       
+                                            <form id="addform" th:action="@{/user/addtocart}" method="post">
+                                                <input type="hidden" th:name="book_id" th:value="${book.id}">
+                                               
+                                                <button sec:authorize="!hasAuthority('1') && isAuthenticated()" id="addbutton" type="submit" class="btn btn-default btn-sm">
+                                                   Add to cart <span class="glyphicon glyphicon-shopping-cart"></span>
+                                                </button>
+                                                
+                                             </form>   
+                                            
+                                    
+                                   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                  
+                    
+                    
+                    <div class="text-align-center">
+                        <ul class="pagination pagination-sm">
+                            <li class="disabled"><a href="#">Prev</a>
+                            </li>
+                            <li class="active"><a href="#">1</a>
+                            </li>
+                            <li><a href="#">2</a>
+                            </li>
+                            <li><a href="#">3</a>
+                            </li>
+                            <li><a href="#">4</a>
+                            </li>
+                            <li><a href="#">5</a>
+                            </li>
+                            <li><a href="#">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+
+    </body>
+
+
+
+</html>

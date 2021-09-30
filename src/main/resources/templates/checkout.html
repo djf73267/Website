@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="User account registration" />
+  <meta name="author" content="" />
+  <link rel="icon" href="favicon.ico" />
+
+  <title>Checkout</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/checkout.css}" type="text/css"/>
+  <link rel="stylesheet" th:href="@{/css/handle-counter.css}">
+</head>
+
+<body class="gray-bg">
+    
+    <div class="container">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        
+                        <h2 id="title">Checkout</h2>
+                    </div>
+
+                    
+                    <div class="ibox-content">
+                        
+                        
+                        <div id="accordion">
+                            <!-- Customer info section-->
+                            <div class="card">
+                             
+                                <div class="card-header" id="headingOne">
+                                  <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                  <h5 class="mb-0">
+                                    <div class="numberCircle pull-left" style="font-size: 13px">1</div> <span class="section-title">Customer</span> <span th:text="|${user.firstname} ${user.lastname}|" class="pull-right text-muted"></span>
+                                    
+                                  </h5>
+                                  </a>
+                                </div>
+                              
+                              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                 Checking out as user <span><span class="font-weight-bold" th:text="${user.username}"></span>? 
+                                
+                                 <p></p>
+                                 <form id="logoutform" th:action="@{/logout}" method="post">
+                                  <button type="submit" class="btn collapsed btn-primary rounded-pill logoutbutton pull-right">logout</button>
+                                </form>
+                                <button class="btn collapsed btn-primary rounded-pill pull-left" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                  <div style="font-size: 16px">CONTINUE</div> 
+                                </button>
+                                </span>
+
+                                 
+                                 
+                                </div>
+                              </div>
+                            </div>
+
+
+                          <form th:action="@{/checkout}" method="POST">
+                            <!-- Billing address section-->
+                            <div class="card">
+                              <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                   <div class="numberCircle pull-left" style="font-size: 13px">2</div> <span class="section-title">Billing</span>
+                                  
+                                </h5>
+                              </div>
+                              <!-- billing address inputs -->
+                              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div class="card-body">
+                                  
+
+
+
+                                  <!-- first/last name -->
+                                  <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                      <label for="validationCustom01">
+                                        <small class="form-text text-muted">First Name</small>
+                                      </label>
+                                      <input type="text" class="form-control" id="validationCustom01" placeholder="First name" th:field="${user.Firstname}" th:value="${user.firstname}" readonly required>
+                                      <div class="valid-feedback">
+                                        Looks good!
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                      <label for="validationCustom02">
+                                        <small class="form-text text-muted">Last Name</small>
+                                      </label>
+                                      <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" th:value="${user.lastname}" readonly required>
+                                      <div class="valid-feedback">
+                                        Looks good!
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- Address-->
+                                  <div class="form-row">
+                                    <div class="col-md-12 mb-3">
+                                      <label for="validationCustom03">
+                                        <small class="form-text text-muted">Street</small>
+                                      </label>
+                                      <input type="text" class="form-control" id="validationCustom03" placeholder="Street" th:field="${address.Street}" th:value="${address.street}" required>
+                                      <div class="valid-feedback">
+                                        Looks good!
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- City/state -->
+                                  <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                      <label for="validationCustom04">
+                                        <small class="form-text text-muted">City</small>
+                                      </label>
+                                      <input type="text" class="form-control" id="validationCustom04" placeholder="City" th:field="${address.City}" th:value="${address.city}" required>
+                                      <div class="valid-feedback">
+                                        Looks good!
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                      <label for="validationCustom05">
+                                        <small class="form-text text-muted">State</small>
+                                      </label>
+                                      <input type="text" class="form-control" id="validationCustom05" placeholder="State" th:field="${address.State}" th:value="${address.state}" required>
+                                      <div class="valid-feedback">
+                                        Looks good!
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- Zipcode/phone number -->
+                                  <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                      <label for="validationCustom06">
+                                        <small class="form-text text-muted">Zipcode</small>
+                                      </label>
+                                      <input type="number" class="form-control" id="validationCustom06" placeholder="Zipcode" th:field="${address.Zipcode}" th:value="${address.zipcode}" required>
+                                      <div class="valid-feedback">
+                                        Looks good!
+                                      </div>
+                                    </div>
+                                    <div class="col-md-8 mb-3">
+                                      <label for="validationCustom07">
+                                        <small class="form-text text-muted">Phone Number</small>
+                                      </label>
+                                      <input type="number" class="form-control" id="validationCustom07" placeholder="Phone number" th:field="${user.Phone_number}" th:value="${user.phone_number}" required>
+                                      <div class="valid-feedback">
+                                        Looks good!
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
+
+                                  
+
+
+
+
+
+
+
+
+                                  <button type="button" class="btn collapsed btn-primary rounded-pill" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    <div style="font-size: 16px">BACK</div> 
+                                  </button>
+                                  <button type="button" class="btn collapsed btn-primary rounded-pill" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <div style="font-size: 16px">CONTINUE</div> 
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- Paymentcard section -->
+                            <div class="card">
+                              <div class="card-header" id="headingThree">
+                                <h5 class="mb-0">
+                                  <div class="numberCircle pull-left" style="font-size: 13px">3</div> <span class="section-title">Payment</span> 
+                                </h5>
+                              </div>
+                              <!-- paymentcard inputs -->
+                              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div class="card-body">
+
+
+
+                            <!---->
+
+
+
+
+
+                              <div class="row">
+                                <div class="col-lg-8 mx-auto">
+                                  <div class="bg-white rounded-lg shadow-sm p-2">
+                                    <!-- Credit card form tabs -->
+                                    <ul role="tablist" class="nav bg-light nav-pills rounded-pill nav-fill mb-3">
+                                      <li class="nav-item ">
+                                        <a data-toggle="pill" href="#nav-tab-card" class="nav-link active rounded-pill">
+                                                            <i class="fa fa-credit-card"></i>
+                                                            Credit Card
+                                                        </a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a data-toggle="pill" href="#" class="nav-link rounded-pill disabled">
+                                                          <del>  <i class="fa fa-paypal"></i> 
+                                                            Paypal
+                                                          </del>
+                                                        </a>
+                                      </li>
+                                      
+                                    </ul>
+                                    <!-- End -->
+
+
+                                    <!-- Credit card form content -->
+                                    <div class="tab-content">
+
+                                      <!-- credit card info-->
+                                      <div id="nav-tab-card" class="tab-pane fade show active">
+                                        
+                                       
+                                          
+                                          
+
+
+                                          <div class="form-group">
+                                            <label for="cardNumber">Card number
+                                              <span class="text-muted pull-right">
+                                                <i class="fa fa-cc-visa mx-1"></i>
+                                                <i class="fa fa-cc-amex mx-1"></i>
+                                                <i class="fa fa-cc-mastercard mx-1"></i>
+                                            </span>
+                                            </label>
+                                            <div>
+                                              <!--<span class="cardnumwrap"> -->
+                                                <input type="number" id="cardnum" name="cardNumber" placeholder="Card Number" class="form-control" th:field="${card.CardNum}" th:value="${card.cardNum}" required>
+                                              <!--</span>-->
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-sm-6">
+                                              <div class="form-group">
+                                                <label><span class="hidden-xs">Expiration</span></label>
+                                                
+                                                  <input type="text" placeholder="MM/DD" name="" class="form-control" maxlength="5" th:field="${card.Exp_date}" th:value="${card.exp_date}" required>
+                                                  
+                                                
+                                              </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                              <div class="form-group mb-4">
+                                                <label data-toggle="tooltip">CVV
+                                                                            
+                                                
+                                                    <span class="fa fa-question-circle fa-lg" data-toggle="popover" data-container="body" data-html="true" 
+                                                    data-content="<div class='text-center one-card'>The CVV is the 3 digit code on back of the card. For American Express, it is the four digit code on the front of the card.<div class='visa-mc-cvc-preview'></div><div class='amex-cvc-preview'></div></div>"
+                                                    data-trigger="hover"></span>
+                                                    
+                                                                        </label>
+                                                <input type="number" maxlength="4" required class="form-control" th:field="${card.CVV}"th:value="${card.CVV}" placeholder="CVV">
+                                              </div>
+                                            </div>
+
+
+
+                                          </div>
+                                          
+                                        
+                                      </div>
+                                      <!-- End -->
+
+                                    
+                                  
+                                    </div>
+                                    <!-- End -->
+
+                                  </div>
+                                </div>
+                              </div>
+
+
+
+
+                            <!---->
+
+
+
+
+
+
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <button type="button" class="btn collapsed btn-primary rounded-pill pull-left" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <div class="pull-left" style="font-size: 16px">BACK</div> 
+                                  </button>
+                                  <button type="button" class="btn collapsed btn-primary rounded-pill pull-left" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    <div class="pull-right" style="font-size: 16px">CONTINUE</div> 
+                                  </button> 
+                                </div>
+                                
+                              </div>
+
+                                  
+                                </div>
+                              </div>
+                            </div>
+                            <!--Review items-->
+                            <div class="card">
+                              <div class="card-header" id="headingThree">
+                                <h5 class="mb-0">
+                                  <div class="numberCircle pull-left" style="font-size: 13px">4</div> <span class="section-title">Review items</span>
+                                  
+                                </h5>
+                              </div>
+                              <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                                <div class="card-body">
+
+
+
+                              <!-- cart item template -->
+                    <div class="ibox-content" th:each="item, iter : ${itemlist}">
+                      <div class="table-responsive">
+                          <table class="table shoping-cart-table">
+                              <tbody>
+                              <tr>
+                                  <td width="90">
+                                      
+                                          <a class="image-link" th:href="'/book/' + ${books[iter.index].ISBN}"><img class="image" th:src="|@{ ${books[iter.index].cover_picture} }|" alt="book cover">
+                                    
+                                  </td>
+                                  <td class="desc">
+                                      <div>
+                                          <h4 class="cart-item-title"><span th:text="${books[iter.index].title}"></span></h4>
+                                          <p class="info" th:text="${books[iter.index].author}"></p> 
+                                      </div>
+                                     
+                                      
+                                      <p class="small" th:text="|ISBN-13: ${books[iter.index].ISBN}|"></p>
+                                      <dl class="small m-b-none">
+                                          <dt>Description</dt>
+                                          <dd th:text="${books[iter.index].description}"></dd>
+                                      </dl>
+  
+                                     
+                                  </td>
+  
+                                 
+                                  <td>
+
+                                      <!-- book quantity counter -->
+                                      <!-- need unique id for each counter -->
+                                      
+                                          <input type="hidden" th:name="book_id" th:value="${item.id.book_id}">
+                                          <div class="handle-counter" th:id="'handleCounter' + ${iter.index}">
+                                              
+                                                      
+      
+      
+
+
+
+                                          <select th:name="quantity" class="form-control" th:onchange="|updateQuantity('${iter.index}')|">
+                                              <option th:if="${item.quantity == 1}" th:value="1" selected>Qty: 1</option>
+                                              <option th:if="${item.quantity == 2}" th:value="2" selected>Qty: 2</option>
+                                              <option th:if="${item.quantity == 3}" th:value="3" selected>Qty: 3</option>
+                                              <option th:if="${item.quantity == 4}" th:value="4" selected>Qty: 4</option>
+                                              <option th:if="${item.quantity == 5}" th:value="5" selected>Qty: 5</option>
+                                              <option th:if="${item.quantity == 6}" th:value="6" selected>Qty: 6</option>
+                                              <option th:if="${item.quantity == 7}" th:value="7" selected>Qty: 7</option>
+                                              <option th:if="${item.quantity == 8}" th:value="8" selected>Qty: 8</option>
+                                              <option th:if="${item.quantity == 9}" th:value="9" selected>Qty: 9</option>
+                                              <option th:if="${item.quantity == 10}" th:value="10" selected>Qty: 10</option>
+                                            </select>
+                                      
+
+                                  </td>
+                                  <td> <!-- price calculation -->
+                                      <h4 th:with="result=${books[iter.index].price}">
+                                          <span>$</span><span th:text="${result}"></span>
+                                      </h4>
+                                  </td>
+
+                                  
+                              </tr>
+                              </tbody>
+                          </table>
+                      </div>
+  
+                  </div>
+                  <!-- cart item template -->
+
+                  <!--place order-->
+                  <div class="ibox-content text-center">
+                    <input id="postpromo" type="hidden" th:name="promocode">
+                    <button type="submit" class="btn btn-primary rounded-pill">
+                      <div style="font-size: 16px">PLACE ORDER</div> 
+                    </button>
+
+
+                  </div>
+
+                  <div class="ibox-content text-center">
+                    <button type="button" class="btn collapsed btn-primary rounded-pill" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      <div style="font-size: 16px">BACK</div> 
+                    </button>
+
+
+                  </div>
+
+
+
+
+
+
+
+
+                                  
+                                
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                    <!-- cart item template -->
+
+
+                
+                    
+                   
+                   
+                </div>
+    
+            </div>
+          </form>
+            <div class="col-md-4">
+                <div class="ibox">
+                    <div class="ibox-title">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <a th:href="@{/cart}" style="font-size: medium; margin-top: 5px;">Edit cart</a>
+                        </div>
+                        
+                      </div>
+                   
+                      <div class="ibox-content" style="padding: 0%; margin-left: 4%;">
+                        <div class="col-md-12">
+                          
+
+                            
+
+                            
+
+                            <div id="enterpromo" class="form-inline">
+                              <label for="promocode">
+                                <small class="form-text text-muted">Have a promo code?</small>
+                              </label>
+                              <input id="promocode" type="text" placeholder="Promo code">
+                              <button id="promobutton" type="button" class="btn btn-primary rounded-pill">APPLY</button>
+                            </div>
+  
+  
+                      
+                        </div>
+                          
+                        
+                       
+                          
+                        
+                      </div>
+                      
+                        
+                    </div>
+                    <div class="ibox-content">
+
+                      <div id="order-summary">
+                        
+                        <span class="col-md-12 font-weight-bold" style="font-size: larger;">Order Summary</span>
+                        <table>
+                          <tbody>
+                            <!--total items/price-->
+                            <tr>
+                              <td class="col-md-8">
+                                <span th:text="'Items (' + ${numresults} + ')'"></span>
+                              </td>
+                              <td class="col-md-4 text-right">
+                                <span th:text="'$' + ${totalprice}">
+
+                                </span>
+                              </td>
+                            </tr>
+                            <!--Shipping/handling-->
+                            <tr>
+                              <td class="col-md-8">
+                                <span>Shipping & handling:</span>
+                              </td>
+                              <td class="col-md-4 text-right">
+                                <span>$0.00</span>
+                              </td>
+                            </tr>
+                            <!--separator-->
+                            <tr class="order-summary-separator">
+                              <td class="col-md-8"></td>
+                              <td class="col-md-4">
+                                <div>
+                                  <hr>
+                                </div>
+                                
+                              </td>
+                            </tr>
+        
+                            <!--tax-->
+                            <tr>
+                              <td class="col-md-8">
+                                <span>Total before tax:</span>
+                              </td>
+                              <td class="col-md-4 text-right">
+                                <span id="totalbeforetax" th:text="'$' + ${totalprice}">
+                                </span>
+                              </td>
+                            </tr>
+                             <!--promo-->
+                             <tr id="promorow" class="tr-hide">
+                              <td class="col-md-8">
+                                <span>Promo applied:</span>
+                              </td>
+                              <td class="col-md-4 text-right">
+                                <span id="discountamount"></span>
+                              </td>
+                            </tr>
+                            <!--tax cont.-->
+                            <tr>
+                              <td class="col-md-8">
+                                <span>Estimated tax (7%):</span>
+                              </td>
+                              <td class="col-md-4 text-right">
+                                <span id="taxamount" th:text="'$' + ${tax}"></span>
+                              </td>
+                            </tr>
+                            <!-- separator -->
+                            <tr>
+                              <td colspan="2">
+                                <hr>
+                              </td>
+                            </tr>
+                            <!--Total price-->
+                            <tr>
+                              <td class="font-weight-bold" style="font-size: larger; color: red;">
+                                <div class="col-md-8">
+                                  <span>Order total:</span>
+                                </div>
+                              </td>
+                              <td class="font-weight-bold" style="font-size: larger; color: red;">
+                                <div class="col-md-4">
+                                  <span id="grandtotal" th:text="'$' + ${grandtotal}"></span>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+
+
+                      </div>
+                      
+
+
+
+                      
+                        
+    
+                     
+                       
+                        
+                        
+
+                       
+                        
+                    </div>
+                </div>
+    
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Support</h5>
+                    </div>
+                    <div class="ibox-content text-center">
+                        <h3><i class="fa fa-phone"></i> +43 100 783 001</h3>
+                        <span class="small">
+                            Please contact with us if you have any questions. We are avalible 24h.
+                        </span>
+                    </div>
+                </div>
+    
+                <div class="ibox">
+                    <div class="ibox-content">
+    
+                        <p class="font-bold">
+                        Other products you may be interested
+                        </p>
+                        <hr>
+                        <div>
+                            <a href="#" class="product-name"> Product 1</a>
+                            <div class="small m-t-xs">
+                                Many desktop publishing packages and web page editors now.
+                            </div>
+                            <div class="m-t text-righ">
+    
+                                <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                            </div>
+                        </div>
+                        <hr>
+                        <div>
+                            <a href="#" class="product-name"> Product 2</a>
+                            <div class="small m-t-xs">
+                                Many desktop publishing packages and web page editors now.
+                            </div>
+                            <div class="m-t text-righ">
+    
+                                <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+    <script type="text/javascript" th:inline="javascript">
+    document.getElementById("promobutton").addEventListener("click", function() {
+     
+      var promocode = document.getElementById("promocode").value;
+      var promodiscount = 0;
+
+      /*<![CDATA[*/
+  
+      // LOOP OVER PROMOTIONS
+      /*[# th:each="promo : ${promolist}"]*/ 
+    
+      if([[${promo.promoName}]].localeCompare(promocode) == 0){ // Promo code entered matches an available promotion
+
+        // LOOP OVER BOOKS IN CART
+        /*[# th:each="book : ${books}"]*/
+
+        if([[${book.promotion_id == promo.id}]]){ // book in cart is in an ongoing promotion
+
+          // FIND QUANTITIES OF BOOKS IN CART
+          /*[# th:each="item : ${itemlist}"]*/
+
+          if([[${item.getBookId() == book.id}]]){
+            promodiscount += [[${promo.amount * 0.01 * book.price * item.quantity}]];
+          }
+
+          /*[/]*/
+
+
+          
+        }
+
+        
+
+        /*[/]*/
+
+        
+      }
+     
+       
+    /*[/]*/
+
+      
+
+/*]]>*/
+
+      if(promodiscount > 0){
+
+        document.getElementById("postpromo").value = promocode;
+
+        document.getElementById("enterpromo").innerHTML = "<div class='alert alert-success' role='alert' style='margin-top: 10%;'> Promo code entered succesfully</div>";
+       
+
+        var totalbeforetax = parseFloat(document.getElementById("totalbeforetax").innerHTML.substring(1));
+        console.log("BEFORE TAX:" + totalbeforetax);
+        document.getElementById("totalbeforetax").innerHTML = "$" + (totalbeforetax - promodiscount);
+
+        var tax = parseFloat(document.getElementById("taxamount").innerHTML.substring(1));
+        var newtax = tax - (promodiscount * 0.07);
+        document.getElementById("taxamount").innerHTML = "$" + newtax;
+        document.getElementById("grandtotal").innerHTML = "$" + (totalbeforetax - promodiscount + newtax);
+
+
+        document.getElementById("discountamount").innerHTML = "- $" + promodiscount;
+        document.getElementById("promorow").className = "tr-show";
+        document.getElementById("promorow").classList.add('font-weight-bold')
+
+      }
+
+     
+
+
+    });
+      
+  </script>
+
+
+    <script>
+  
+
+      $(function () {
+        $('[data-toggle="popover"]').popover()
+      })
+
+    </script>
+
+</body>
+
+</html>

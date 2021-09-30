@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title> Add Promo </title>
+</head>
+<body>
+<div id="div1">
+  <div class="container">
+      <h1 style="color:#2a8fbd;">Add Promos</h1>
+      <p class="lead">This panel lets you add a new promo</p>
+      <p class="text-danger"> All fields are required. </p>
+  </div>
+
+    <div id="main_content">
+        <div class="promomanager">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Promo Code</th>
+                    <th>Reduction Rate (%)</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                   
+                </tr>
+                </thead>
+                
+           
+                <form th:action="@{/admin/manage/addpromo}" th:object="${addpromo}" method="POST" role = "form" data-toggle="validator">
+                    <tr>
+                        <th><input type="text" name = "promoName" id = "promoName"required></th>
+                        <th><input type="number" name = "amount" id = "amount" required></th>
+                        <th><input type="date" name = "startDate" id = "startDate" required></th>
+                        <th><input type="date" name = "endDate" id = "endDate" required></th>
+                    
+                    </tr>
+            </table>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">Set Promo</button>
+                </div>
+            </form>    
+        </div>
+        
+    </div>
+
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Rate</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="promotion: ${listPromo}">
+                <td th:text="${promotion.promoName}">Promo Name</td>
+                <td th:text="${promotion.amount}">Amount</td>
+                <td th:text="${promotion.startDate}">Start Date</td>
+                <td th:text="${promotion.endDate}">End Date</td>
+                <td>
+                    <a th:href="@{'/admin/manage/sendEmail/' + ${promotion.ID}}">Send Email</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div><!-- div1 -->
+<!-- jQuery-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+<!-- Bootstrap -->
+<script
+  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+  integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+  crossorigin="anonymous"></script>
+
+<!-- Bootstrap Validator plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
+</body>
+</html>

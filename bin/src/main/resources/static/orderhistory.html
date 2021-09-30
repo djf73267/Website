@@ -1,0 +1,65 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title> Add Promo </title>
+</head>
+<body>
+<div id="div1">
+
+
+
+  <div class="container">
+      <h1 style="color:#2a8fbd;">Order history</h1>
+      <p class="lead">View order history from last month.</p>
+
+  </div>
+        <h3> Ordered on {Date} </h3>
+        <h5> Order ID : {#34564777} </h5>
+
+
+        <h5 class="text-danger"> Order can be cancelled anytime within 14 days from the date of purchase.  </h5>
+
+
+        <table class="table {% if ord[jj].orderstatus == 'cancelled' %} text-danger {% endif %} ">
+            <tr class="row">
+                <th class="col-4"> Book Name</th>
+                <th class="col-4"> Quantity</th>
+                <th class="col-4"> Price</th>
+            </tr>
+
+            <tr class="row">
+                <td class="col-4"> AtonementT</td>
+                <td class="col-4"> 01</td>
+                <td class="col-4"> {{ kk.quantity * kk.sellingPrice }}</td>
+            </tr>
+
+            <tr class="row">
+                <td class="col-8"></td>
+                <td class="col-4"> Promotional Reduction</td>
+            </tr>
+
+            <tr class="row">
+                <td class="col-4"></td>
+                <td class="col-4"> Order Total</td>
+                <td class="col-4"> {{ ord[jj].total }}</td>
+            </tr>
+
+            <tr class="row">
+                <td class="col-3"></td>
+                <td class="col-6"><a class="btn btn-primary btn-block" href="{{ url_for('cancel_order', id = ord[jj].orderID) }}" role="button">Cancel
+                    this order</a></td>
+                <td class="col-3"></td>
+            </tr>
+
+        </table>
+
+
+    </div>
+
+</div><!-- div1 -->
+
+
+</body>
+</html>

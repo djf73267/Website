@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="User account registration" />
+  <meta name="author" content="" />
+  <link rel="icon" href="favicon.ico" />
+
+  <title>Verify</title>
+  <!-- Bootstrap core CSS -->
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+</head>
+
+<body class="gray-bg">
+
+  <div class="container">
+
+    <div class="card border-success float-none mx-auto" style="width: 500px; margin: 0 auto;">
+      <!-- <img class="card-img-top" src="holder.js/100px180/" alt=""> -->
+
+      <div class="card-header">
+        <h1 class="card-title">Email Verification</h1>
+      </div>
+      <div class="card-body">
+        <!-- <p class="card-text">Text</p> -->
+        <form th:action="@{/confirm}" method="POST" class="center-block">
+
+          <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+
+          <div th:if="${successMessage}" class="alert alert-success" role="alert" th:text="${successMessage}">
+          </div>
+
+
+          <div class="form-group">
+            <label for="token">Token</label>
+            <input type="text" th:name="token" id="token" class="form-control" th:if="${token}" th:value="${token}"
+              placeholder="Token" aria-describedby="token">
+            <!-- <small id="token" class="text-muted">Help text</small> -->
+            <input id="token" th:name="token" type="text" th:if="!${token}" th:value="${token}" class="form-control"
+              placeholder="Confirmation token" required />
+          </div>
+
+          <!-- <div class="form-group input-group">
+        <label for="token">Token</label>
+        <input id="token" th:name="token" type="text" th:if="${token}" th:value="${token}"
+          placeholder="Confirmation token" required />
+  
+        <input id="token" th:name="token" type="text" th:if="!${token}" th:value="${token}"
+          placeholder="Confirmation token" required />
+  
+      </div> -->
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" th:name="email" type="email" th:placeholder="Email" required class="form-control">
+          </div>
+
+
+          <button type="submit" class="btn btn-success">Submit </button>
+
+        </form>
+      </div>
+    </div>
+
+
+  </div>
+</body>
+
+</html>

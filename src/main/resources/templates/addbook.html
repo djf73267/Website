@@ -1,0 +1,127 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+    <head>
+    
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+              integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" th:href="@{css/style.css}" type="text/css"/>
+        
+    
+    </head>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" th:href="@{/admin}">Admin Dashboard</a>
+          <button
+            class="navbar-toggler d-lg-none"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapsibleNavId"
+            aria-controls="collapsibleNavId"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/manage/users}">Manage Users</a>
+                </li>
+
+              <li class="nav-item active">
+                <a class="nav-link" href="#"
+                  >Manage Books <span class="sr-only">(current)</span></a>
+              </li>
+            
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/manage/addpromo}">Manage Promotions</a>
+              </li>
+              
+              <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                  <a class="dropdown-item" href="#">Action 1</a>
+                  <a class="dropdown-item" href="#">Action 2</a>
+                </div>
+              </li> -->
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/home}">Home</a>
+              </li>
+            </ul>
+            <!-- <form class="form-inline my-2 my-lg-0">
+              <input
+                class="form-control mr-sm-2"
+                type="text"
+                placeholder="Search"
+              />
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                Search
+              </button>
+            </form> -->
+            
+          </div>
+        </nav>
+      </header>
+    
+    <body>
+ 
+    <div id="div1">
+    
+        <div class="container">
+
+            <div th:if="${addBook}"
+                class="alert alert-success" role="alert"
+                th:text="${addBook}">
+            </div>
+
+
+            <h1 style="color:#2a8fbd;">Add Books</h1>
+            <p class="lead">This panel lets you add a new book</p>
+            <p class="text-danger"> All fields are required </p>
+        </div>
+    
+        <div class="container">
+            <form th:action="@{/admin/manage/books/add}" th:object="${book}" method="post" enctype="multipart/form-data">
+                <div class="form-group row">
+                    <label class="col-3 col-form-label" for="title"> Book Title * </label>
+                    <input type="text" class="col-6 form-control" id="title" th:name="title" required>
+                </div>
+                <div class="form-group row">
+                    <label class="col-3 col-form-label" for="author"> Book Author * </label>
+                    <input type="text" class="col-6 form-control" id="author" th:name="author" required>
+                </div>
+                <div class="form-group row">
+                    <label class="col-3 col-form-label" for="ISBN"> ISBN * </label>
+                    <input type="text" class="col-6 form-control" id="ISBN" th:name="ISBN" required>
+                </div>
+            
+    
+                <div class="form-group row">
+                    <label class="col-3 col-form-label" for="sellingPrice"> Price * </label>
+                    <input type="number" class="col-6 form-control" id="sellingPrice" th:name="price" required>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-3 col-form-label" for="quantity"> Quantity * </label>
+                    <input type="number" class="col-6 form-control" id="quantity" th:name="quantity" required>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-3 col-form-label" for="description"> Description * </label>
+                    <input type="text" class="col-6 form-control" id="description" th:name="description" required>
+                </div>
+
+                <input type="submit" class="btn btn-primary btn-lg btn-block col-4 justify-content-center"
+                       value="Add Book">
+            </form>
+        </div>
+    
+    </div><!-- div1 -->
+    
+    
+    </body>
+    </html>
+    

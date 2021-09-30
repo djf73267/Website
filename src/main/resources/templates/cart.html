@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="User account registration" />
+  <meta name="author" content="" />
+  <link rel="icon" href="favicon.ico" />
+
+  <title>Shopping Cart</title>
+ 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/cart.css}" type="text/css"/>
+  <link rel="stylesheet" th:href="@{/css/handle-counter.css}">
+</head>
+
+<body class="gray-bg">
+    
+    <div class="container">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        
+                        <span id="price" class="pull-right pull-down">Price</span>
+                        <h2 id="title">Shopping Cart</h2>
+                    </div>
+
+                    <!-- cart item template -->
+                    <div class="ibox-content" th:each="item, iter : ${itemlist}">
+                        <div class="table-responsive">
+                            <table class="table shoping-cart-table">
+                                <tbody>
+                                <tr>
+                                    <td width="90">
+                                        
+                                            <a class="image-link" th:href="'/book/' + ${books[iter.index].ISBN}"><img class="image" th:src="|@{ ${books[iter.index].cover_picture} }|" alt="book cover">
+                                      
+                                    </td>
+                                    <td class="desc">
+                                        <div>
+                                            <h4 class="cart-item-title"><span th:text="${books[iter.index].title}"></span></h4>
+                                            <p class="info" th:text="${books[iter.index].author}"></p> 
+                                        </div>
+                                       
+                                        
+                                        <p class="small" th:text="|ISBN-13: ${books[iter.index].ISBN}|"></p>
+                                        <dl class="small m-b-none">
+                                            <dt>Description</dt>
+                                            <dd th:text="${books[iter.index].description}"></dd>
+                                        </dl>
+    
+                                        <div class="m-t-sm">
+                                            
+                                           
+                                            <form th:action="@{/user/removeitem}" method="POST">
+                                                <input type="hidden" th:name="cartid" th:value="${item.id.cartid}">
+                                                <input type="hidden" th:name="bookid" th:value="${item.id.book_id}">
+                                                <button class="remove-button" type="submit"><i class="fa fa-trash"></i> Remove item</button>
+                                            </form>
+                                                
+                                            
+                                            
+                                            
+                                            
+                                            
+                                        </div>
+                                    </td>
+    
+                                   
+                                    <td>
+
+                                        <!-- book quantity counter -->
+                                        <!-- need unique id for each counter -->
+                                        <form th:id="'updateQuantityForm' + ${iter.index}" th:action="@{/user/addtocart}" method="POST">
+                                            <input type="hidden" th:name="book_id" th:value="${item.id.book_id}">
+                                            <div class="handle-counter" th:id="'handleCounter' + ${iter.index}">
+                                                
+                                                        
+        
+        
+
+
+
+                                            <select th:name="quantity" class="form-control" th:onchange="|updateQuantity('${iter.index}')|">
+                                                
+                                                <option th:if="${item.quantity != 1}" th:value="1">Qty: 1</option>
+                                                <option th:if="${item.quantity == 1}" th:value="1" selected>Qty: 1</option>
+                                                <option th:if="${item.quantity != 2}" th:value="2">Qty: 2</option>
+                                                <option th:if="${item.quantity == 2}" th:value="2" selected>Qty: 2</option>
+                                                <option th:if="${item.quantity != 3}" th:value="3">Qty: 3</option>
+                                                <option th:if="${item.quantity == 3}" th:value="3" selected>Qty: 3</option>
+                                                <option th:if="${item.quantity != 4}" th:value="4">Qty: 4</option>
+                                                <option th:if="${item.quantity == 4}" th:value="4" selected>Qty: 4</option>
+                                                <option th:if="${item.quantity != 5}" th:value="5">Qty: 5</option>
+                                                <option th:if="${item.quantity == 5}" th:value="5" selected>Qty: 5</option>
+                                                <option th:if="${item.quantity != 6}" th:value="6">Qty: 6</option>
+                                                <option th:if="${item.quantity == 6}" th:value="6" selected>Qty: 6</option>
+                                                <option th:if="${item.quantity != 7}" th:value="7">Qty: 7</option>
+                                                <option th:if="${item.quantity == 7}" th:value="7" selected>Qty: 7</option>
+                                                <option th:if="${item.quantity != 8}" th:value="8">Qty: 8</option>
+                                                <option th:if="${item.quantity == 8}" th:value="8" selected>Qty: 8</option>
+                                                <option th:if="${item.quantity != 9}" th:value="9">Qty: 9</option>
+                                                <option th:if="${item.quantity == 9}" th:value="9" selected>Qty: 9</option>
+                                                <option th:if="${item.quantity != 10}" th:value="10">Qty: 10</option>
+                                                <option th:if="${item.quantity == 10}" th:value="10" selected>Qty: 10</option>
+                                              </select>
+                                        </form>
+
+                                    </td>
+                                    <td> <!-- price calculation -->
+                                        <h4 th:with="result=${books[iter.index].price}">
+                                            <span>$</span><span th:text="${result}"></span>
+                                        </h4>
+                                    </td>
+
+                                    
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+    
+                    </div>
+                    <!-- cart item template -->
+                    <div class="ibox-content subtotal">
+                        
+                       
+                        <span class="pull-right subtotal_amount" th:text="'Subtotal (' + ${numresults} + ' items): $' + ${totalprice}"></span>
+                        
+                            
+                       
+                    </div>
+                   
+                    
+                   
+                   
+                </div>
+    
+            </div>
+            <div class="col-md-4">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Cart Summary</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <span th:text="'Subtotal (' + ${numresults} + ' items):'"></span>
+                        <h2 class="font-bold" th:text="'$' + ${totalprice}">
+                            
+                        </h2>
+    
+                        <hr>
+                        <span class="text-muted small">
+                            *For United States, France and Germany applicable sales tax will be applied
+                        </span>
+                        <div class="m-t-sm">
+                            <div class="btn-group">
+                            <a th:href="@{/checkout}" class="btn btn-primary btn-sm"> Proceed to checkout</a>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Support</h5>
+                    </div>
+                    <div class="ibox-content text-center">
+                        <h3><i class="fa fa-phone"></i> +43 100 783 001</h3>
+                        <span class="small">
+                            Please contact with us if you have any questions. We are avalible 24h.
+                        </span>
+                    </div>
+                </div>
+    
+                <div class="ibox">
+                    <div class="ibox-content">
+    
+                        <p class="font-bold">
+                        Other products you may be interested
+                        </p>
+                        <hr>
+                        <div>
+                            <a href="#" class="product-name"> Product 1</a>
+                            <div class="small m-t-xs">
+                                Many desktop publishing packages and web page editors now.
+                            </div>
+                            <div class="m-t text-righ">
+    
+                                <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                            </div>
+                        </div>
+                        <hr>
+                        <div>
+                            <a href="#" class="product-name"> Product 2</a>
+                            <div class="small m-t-xs">
+                                Many desktop publishing packages and web page editors now.
+                            </div>
+                            <div class="m-t text-righ">
+    
+                                <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+   
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script th:src="@{/js/handleCounter.js}"></script>
+    <script>
+        
+       
+        $(function ($) {
+            var options = {
+                minimum: 1,
+                maximize: 10,
+                onChange: valChanged,
+                onMinimum: function(e) {
+                    console.log('reached minimum: '+e)
+                },
+                onMaximize: function(e) {
+                    console.log('reached maximize'+e)
+                }
+            }
+
+            $('*[id*=handleCounter]:visible').each(function() {
+                $(this).handleCounter(options);
+            });
+           
+        
+            //$('#handleCounter0').handleCounter(options);
+            //$('#handleCounter2').handleCounter(options)
+			//$('#handleCounter3').handleCounter({maximize: 100})
+        })
+        
+        function valChanged(d) {
+//            console.log(d)
+        }
+    
+        function updateQuantity(num){
+           
+            document.getElementById("updateQuantityForm" + num).submit();
+
+        }
+
+        
+    </script>
+
+</body>
+
+</html>
